@@ -1,3 +1,6 @@
+// Re-export badgemagic library for use in Tauri commands
+pub use badgemagic;
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
   tauri::Builder::default()
