@@ -1,0 +1,3 @@
+[submodule "src-tauri/badgemagic-rs"]
+	path = src-tauri/badgemagic-rs
+	url = git@github.com:Blockmaster2706/badgemagic-rs.git
