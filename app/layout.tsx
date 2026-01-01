@@ -21,18 +21,12 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/theme-provider";
-import { CustomMenubar } from "@/components/menubar";
 
 export default async function RootLayout({
-  params,
   children,
 }: {
-  params: Promise<{ locale: string }>;
   children: React.ReactNode;
 }) {
-  console.log("Params: ", await params);
-  var { locale } = await params;
-  locale = locale || "en";
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -46,17 +40,10 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <I18nProviderClient locale={locale}>{children}</I18nProviderClient>
+            {children}
           </ThemeProvider>
         </body>
       </html>
     </>
   );
-}
-
-import { getStaticParams } from "@/locales/server";
-import { I18nProviderClient } from "@/locales/client";
-
-export function generateStaticParams() {
-  return getStaticParams();
 }
