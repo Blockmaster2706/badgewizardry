@@ -26,7 +26,11 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: stable
 
       - name: setup node
         uses: actions/setup-node@v4
