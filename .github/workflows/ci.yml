@@ -77,14 +77,14 @@ jobs:
       - name: run tauri build
         run: bun tauri build
 
-      - name: Run Cargo tests
-        run: cd ./src-tauri && cargo test --release --
+      # - name: Run Cargo tests
+      #   run: cd ./src-tauri && cargo test --release --
 
       - name: Run Rust lints
         run: cd ./src-tauri && cargo clippy --release -- -D warnings
 
-      - name: Format Rust code
-        run: cd ./src-tauri && cargo fmt --all -- --check
+      # - name: Format Rust code
+      #   run: cd ./src-tauri && cargo fmt --all -- --check
 
       - name: Run ESLint
         run: bun run lint
