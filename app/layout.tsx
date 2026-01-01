@@ -1,5 +1,3 @@
-"use client";
-
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -14,14 +12,26 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const metadata: Metadata = {
+  title: "Character Archive",
+  description: "Character Archive",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { CustomMenubar } from "@/components/menubar";
 
-export default function RootLayout({
+export default async function RootLayout({
+  params,
   children,
 }: {
+  params: Promise<{ locale: string }>;
   children: React.ReactNode;
 }) {
+  var { locale } = await params;
+  locale = locale || "en";
   return (
     <>
       <html lang="en" suppressHydrationWarning>
@@ -35,11 +45,20 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <CustomMenubar />
-            {children}
+            <I18nProviderClient locale={locale}>
+              <CustomMenubar />
+              {children}
+            </I18nProviderClient>
           </ThemeProvider>
         </body>
       </html>
     </>
   );
+}
+
+import { getStaticParams } from "@/locales/server";
+import { I18nProviderClient } from "@/locales/client";
+
+export function generateStaticParams() {
+  return getStaticParams();
 }

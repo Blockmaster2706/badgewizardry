@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/menubar";
 import { ModeToggle } from "./mode-toggle";
 import { useRouter } from "next/navigation";
+import { useI18n, useScopedI18n } from "@/locales/client";
 
 export function CustomMenubar() {
   const router = useRouter();
@@ -28,10 +29,12 @@ export function CustomMenubar() {
         )
       : "none";
 
+  const t = useScopedI18n("menubar.file");
+
   return (
     <Menubar className="absolute top-4 left-4">
       <MenubarMenu>
-        <MenubarTrigger>Datei</MenubarTrigger>
+        <MenubarTrigger>{t("title")}</MenubarTrigger>
         <MenubarContent>
           <MenubarItem
             disabled={
@@ -39,7 +42,7 @@ export function CustomMenubar() {
             }
             onClick={() => router.push("/characters")}
           >
-            Schließen
+            {t("closeCharacter")}
           </MenubarItem>
           <MenubarSeparator />
           <MenubarSeparator />
