@@ -22,7 +22,7 @@ pub fn run() {
       }
       Ok(())
     })
-    .invoke_handler(tauri::generate_handler![send_to_badge])
+    .invoke_handler(tauri::generate_handler![send_to_badge, get_locale])
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
 }
@@ -60,4 +60,9 @@ async fn send_to_badge(message: String, use_usb: bool) -> Result<(), String> {
     }
 
     Ok(())
+}
+
+#[tauri::command]
+async fn get_locale() -> String {
+    sys_locale::get_locale().unwrap_or_else(|| String::from("en-US"))
 }

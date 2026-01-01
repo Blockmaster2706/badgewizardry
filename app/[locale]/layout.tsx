@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,7 +46,10 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <I18nProviderClient locale={locale}>{children}</I18nProviderClient>
+            <I18nProviderClient locale={locale}>
+              <CustomMenubar />
+              {children}
+            </I18nProviderClient>
           </ThemeProvider>
         </body>
       </html>
